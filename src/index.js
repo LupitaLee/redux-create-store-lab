@@ -19,4 +19,33 @@ function render() {
 };
 
 // Use your createStore function and the functions provided here to create a store.
+function createStore(candyReducer){
+  let state;
+    function dispatch(action){
+      state = candyReducer(state, action)
+      render()
+
+    }
+    function getState(){
+      return state
+    }
+    return{
+      dispatch,
+      getState
+
+    }
+}
 // Once the store is created, call an initial dispatch.
+let store = createStore(candyReducer)
+store.dispatch({ type: '@@INIT' });
+
+store.dispatch({type: 'ADD_CANDY', candy: "Jelly Beans" })
+// store.dispatch({type: 'ADD_CANDY', candy: "Jelly Beans" })
+
+// let container = document.getElementById('container')
+
+// container.addEventListener('click', ()=>{
+//   store.dispatch({type: 'ADD_CANDY', candy: "Jelly Beans" })
+// })
+
+// let todos = store.getState();
